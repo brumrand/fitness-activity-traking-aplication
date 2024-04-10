@@ -11,7 +11,7 @@ class ActivityDetailsPostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,7 @@ class ActivityDetailsPostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+                'activity_type_id' => 'required|numeric|exists:activity_types,id',
         ];
     }
 }
