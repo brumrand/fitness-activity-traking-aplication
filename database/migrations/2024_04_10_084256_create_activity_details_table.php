@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('activity_details', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("user_id");
+            $table->unsignedBigInteger("activity_type_id");
+            $table->unsignedBigInteger("distance_unit_id");
+            $table->unsignedBigInteger("elapsed_time_unit_id");
+            $table->string("name");
+            $table->double("distance");
+            $table->double("elapsed_time");
+            $table->date('date');
             $table->timestamps();
         });
     }
