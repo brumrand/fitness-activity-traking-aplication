@@ -19,6 +19,6 @@ Route::get("activites/byType", [ActivityDetailsController::class, "getActivities
 Route::get("activites/byType/distance", [ActivityDetailsController::class, "getDistanceByActivityType"]);
 Route::get("activites/byType/elapsedTime", [ActivityDetailsController::class, "getElapsedTimeByActivityType"]);
 
-Route::post("activity", [ActivityDetailsController::class, "post"]);
+Route::post("activity", [ActivityDetailsController::class, "create"]);
 Route::delete("activity", [ActivityDetailsController::class, "delete"]);
 
