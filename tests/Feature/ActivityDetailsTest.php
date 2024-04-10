@@ -99,7 +99,7 @@ class ActivityDetailsTest extends TestCase
     // }
 
     /**
-    * @depends test_post
+    * @depends test_fail_get_elapsed_time_by_activity_type
     */
     public function test_delete(): void
     {
@@ -110,11 +110,11 @@ class ActivityDetailsTest extends TestCase
         $this->assertNull($check);
     }
     /**
-    * @depends test_post
+    * @depends test_fail_get_elapsed_time_by_activity_type
     */
     public function test_fail_delete(): void
     {
-        $data = ActivityDetail::latest()->first();
+
         $response = $this->delete('api/activity',["id" => 0]);
 
         $response->assertStatus(302);
@@ -123,11 +123,13 @@ class ActivityDetailsTest extends TestCase
 
         $response->assertStatus(302);
 
-        $response = $this->delete('api/activity',["iddd" => $data->id]);
+        $response = $this->delete('api/activity',["iddd" => 1]);
 
         $response->assertStatus(302);
     }
-
+    /**
+    * @depends test_post
+    */
     public function test_get(): void
     {
         $response = $this->get('api/activites');
@@ -144,7 +146,9 @@ class ActivityDetailsTest extends TestCase
             'date'
         ]]);
     }
-
+    /**
+    * @depends test_post
+    */
     public function test_fail_get(): void
     {
         $response = $this->get('/');
@@ -153,7 +157,9 @@ class ActivityDetailsTest extends TestCase
     }
 
 
-
+    /**
+    * @depends test_get
+    */
     public function test_get_by_activity_type(): void
     {
         $data = ActivityDetail::first();
@@ -172,7 +178,9 @@ class ActivityDetailsTest extends TestCase
         ]]);
 
     }
-
+    /**
+    * @depends test_get_by_activity_type
+    */
     public function test_fail_get_by_activity_type(): void
     {
         $data = ActivityDetail::latest()->first();
@@ -192,7 +200,9 @@ class ActivityDetailsTest extends TestCase
 
     }
 
-
+    /**
+    * @depends test_get_by_activity_type
+    */
     public function test_get_distance_by_activity_type(): void
     {
         $data = ActivityDetail::first();
@@ -200,7 +210,9 @@ class ActivityDetailsTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonStructure([["activity_type_id", "distance_unit_id","total_distance"]]);
     }
-
+    /**
+    * @depends test_get_by_activity_type
+    */
     public function test_fail_get_distance_by_activity_type(): void
     {
         $data = ActivityDetail::latest()->first();
@@ -217,7 +229,9 @@ class ActivityDetailsTest extends TestCase
         $response->assertStatus(302);
     }
 
-
+    /**
+    * @depends test_fail_get_distance_by_activity_type
+    */
     public function test_get_elapsed_time_by_activity_type(): void
     {
         $data = ActivityDetail::first();
@@ -225,7 +239,9 @@ class ActivityDetailsTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonStructure([["activity_type_id", "elapsed_time_unit_id","total_time"]]);
     }
-
+    /**
+    * @depends test_get_elapsed_time_by_activity_type
+    */
     public function test_fail_get_elapsed_time_by_activity_type(): void
     {
         $data = ActivityDetail::latest()->first();
