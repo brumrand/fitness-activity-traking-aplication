@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('elapsed_time_units', function (Blueprint $table) {
             $table->id();
+            $table->string("name");
             $table->timestamps();
         });
     }
